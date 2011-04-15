@@ -41,15 +41,52 @@ class Minion_Task_Ciko_Run extends Minion_Task
 			return Minion_CLI::write('That project doesn\'t exist!', 'red');
 		}
 
-		// Here we need to clone the git repository, and run the runner,
-		// capturing the output. Pretty simple
-
+		// Clone the source
 		Git::$git_path = trim(`which git`);
 		$git = new Git('/tmp/'.url::title($project->name()));
-		$git->clone_remote($project->repository(), '-b '.$project->branch().' --recursive', TRUE);
+		Minion_CLI::write(
+			$git->clone_remote(
+				$project->repository(), '-b '.$project->branch().' --recursive',
+				TRUE
+			),
+			'yellow'
+		);
+
+		// Run the runner command
+		$descriptorspec = array(
+			1 => array('pipe', 'w'),
+			2 => array('pipe', 'w'),
+		);
+
+		$pipes = array();
+		$resource = proc_open(
+			escapeshellcmd($project->runner()),
+			$descriptorspec,
+			$pipes,
+			'/tmp/'.url::title($project->name())
+		);
+
+		// Capture the runner output
+		$stdout = stream_get_contents($pipes[1]);
+		$stderr = stream_get_contents($pipes[2]);
+		foreach ($pipes as $pipe) {
+			fclose($pipe);
+		}
+
+		$status = trim(proc_close($resource));
+
+		if ($status)
+		{
+			return Minion_CLI::write(
+				'There was an error executing the runner ('.$status.'):'.
+					"\n$stderr",
+				'red'
+			);
+		}
 
 		return Minion_CLI::write(
-			'Job successfully ran for project '.$config['project'], 'green'
+			'Job successfully ran for project '.$config['project'].":\n$stdout",
+			'green'
 		);
 	}
 }
