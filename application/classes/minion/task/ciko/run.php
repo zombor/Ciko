@@ -44,6 +44,10 @@ class Minion_Task_Ciko_Run extends Minion_Task
 		// Here we need to clone the git repository, and run the runner,
 		// capturing the output. Pretty simple
 
+		Git::$git_path = trim(`which git`);
+		$git = new Git('/tmp/'.url::title($project->name()));
+		$git->clone_remote($project->repository(), '-b '.$project->branch().' --recursive', TRUE);
+
 		return Minion_CLI::write(
 			'Job successfully ran for project '.$config['project'], 'green'
 		);

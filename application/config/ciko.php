@@ -17,5 +17,11 @@
 
 $projects = array();
 
+$project = new Model_Ciko_Project('Ciko');
+$project->repository('git://github.com/zombor/Ciko.git');
+$project->branch('develop');
+$project->runner('phpunit');
+
+$projects['ciko'] = $project;
 
 return $projects;
