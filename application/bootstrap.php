@@ -100,6 +100,7 @@ Kohana::modules(array(
 	'database'   => MODPATH.'database',
 	'kostache'   => MODPATH.'kostache',
 	'git'        => MODPATH.'git',
+	'minion'     => MODPATH.'minion-core',
 	));
 
 /**
