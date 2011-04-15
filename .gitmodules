@@ -7,3 +7,6 @@
 [submodule "modules/database"]
 	path = modules/database
 	url = git://github.com/kohana/database.git
+[submodule "modules/git"]
+	path = modules/git
+	url = git://github.com/Zeelot/kohana-git.git
