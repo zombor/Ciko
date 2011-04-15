@@ -1,0 +1,9 @@
+[submodule "system"]
+	path = system
+	url = git://github.com/kohana/core.git
+[submodule "modules/kostache"]
+	path = modules/kostache
+	url = git://github.com/zombor/KOstache.git
+[submodule "modules/database"]
+	path = modules/database
+	url = git://github.com/kohana/database.git
