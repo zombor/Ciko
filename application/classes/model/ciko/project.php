@@ -87,4 +87,17 @@ class Model_Ciko_Project extends Model
 
 		return $this->_runner;
 	}
+
+	/**
+	 * Writes a runner job output to the database
+	 *
+	 * @return null
+	 */
+	public function write($stdout, $stderr, $status)
+	{
+		Minion_CLI::write(
+			'Saving output to database...',
+			'blue'
+		);
+	}
 }

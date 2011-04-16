@@ -35,7 +35,7 @@ class Minion_Task_Ciko_Run extends Minion_Task
 			return Minion_CLI::write('Please specify a project.', 'red');
 		}
 
-		$project = Kohana::config('ciko.'.$config['project']);
+		$project = Kohana::config('ciko.projects.'.$config['project']);
 		if (NULL === $project)
 		{
 			return Minion_CLI::write('That project doesn\'t exist!', 'red');
@@ -43,7 +43,7 @@ class Minion_Task_Ciko_Run extends Minion_Task
 
 		// Clone the source
 		Git::$git_path = trim(`which git`);
-		$git = new Git('/tmp/'.url::title($project->name()));
+		$git = new Git(Kohana::config('ciko.clone_path').url::title($project->name()));
 		Minion_CLI::write(
 			$git->clone_remote(
 				$project->repository(), '-b '.$project->branch().' --recursive',
@@ -74,6 +74,8 @@ class Minion_Task_Ciko_Run extends Minion_Task
 		}
 
 		$status = trim(proc_close($resource));
+
+		$project->write($stdout, $stderr, $status);
 
 		if ($status)
 		{

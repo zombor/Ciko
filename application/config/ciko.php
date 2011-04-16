@@ -19,9 +19,12 @@ $projects = array();
 
 $project = new Model_Ciko_Project('Ciko');
 $project->repository('git://github.com/zombor/Ciko.git');
-$project->branch('develop');
-$project->runner('phpunit');
+$project->branch('master');
+$project->runner('ls -l');
 
 $projects['ciko'] = $project;
 
-return $projects;
+return array(
+	'clone_path' => '/tmp/', // Full path to where projects will be cloned
+	'projects' => $projects, // An array of projects to run
+);
