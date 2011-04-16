@@ -112,3 +112,7 @@ Route::set('default', '(<controller>(/<action>(/<id>)))')
 		'controller' => 'welcome',
 		'action'     => 'index',
 	));
+
+
+// Setup the database
+db::query(NULL, 'CREATE TABLE IF NOT EXISTS "projects" ("project" TEXT, "result" INTEGER, "stdout" TEXT, "stderr" TEXT)')->execute();

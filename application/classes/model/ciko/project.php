@@ -99,5 +99,12 @@ class Model_Ciko_Project extends Model
 			'Saving output to database...',
 			'blue'
 		);
+
+		db::insert(
+			'projects',
+			array('project', 'result', 'stdout', 'stderr')
+		)->values(
+			array(url::title($this->name()), $status, $stdout, $stderr)
+		)->execute();
 	}
 }
