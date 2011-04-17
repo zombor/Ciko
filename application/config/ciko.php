@@ -22,5 +22,10 @@ return array(
 			->repository('git://github.com/zombor/Ciko.git')
 			->branch('master')
 			->runner('ls -l')
+			->reporters(
+				array(
+					new Reporter_Clover('build/clover.xml'),
+				)
+			),
 	),
 );

@@ -14,6 +14,9 @@ class Model_Ciko_Project extends Model
 	// The runner command to execute
 	protected $_runner;
 
+	// Reporters to run
+	protected $_reporters = array();
+
 	/**
 	 * Constructor that sets the project name
 	 *
@@ -96,6 +99,22 @@ class Model_Ciko_Project extends Model
 		}
 
 		return $this->_runner;
+	}
+
+	/**
+	 * Gets/sets the reporters for this object
+	 *
+	 * @return $this or array
+	 */
+	public function reporters($reporters = NULL)
+	{
+		if ($reporters)
+		{
+			$this->_reporters = $reporters;
+			return $this;
+		}
+
+		return $this->_reporters;
 	}
 
 	/**
