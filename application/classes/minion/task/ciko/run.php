@@ -43,7 +43,9 @@ class Minion_Task_Ciko_Run extends Minion_Task
 
 		// Clone the source
 		Git::$git_path = trim(`which git`);
-		$git = new Git(Kohana::config('ciko.clone_path').url::title($project->name()));
+		$git = new Git(
+			Kohana::config('ciko.clone_path').url::title($project->name())
+		);
 		Minion_CLI::write(
 			$git->clone_remote(
 				$project->repository(), '-b '.$project->branch().' --recursive',
