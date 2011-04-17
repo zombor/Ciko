@@ -25,6 +25,16 @@ class Model_Ciko_Project extends Model
 	}
 
 	/**
+	 * Factory method
+	 *
+	 * @return Model_Ciko_Project
+	 */
+	public static function factory($name)
+	{
+		return new Model_Ciko_Project($name);
+	}
+
+	/**
 	 * Gets/sets the name of this project
 	 *
 	 * @return $this or string

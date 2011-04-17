@@ -15,16 +15,12 @@
  * @license    http://github.com/zombor/Ciko/raw/develop/LICENSE
  */
 
-$projects = array();
-
-$project = new Model_Ciko_Project('Ciko');
-$project->repository('git://github.com/zombor/Ciko.git');
-$project->branch('master');
-$project->runner('ls -l');
-
-$projects['ciko'] = $project;
-
 return array(
 	'clone_path' => '/tmp/', // Full path to where projects will be cloned
-	'projects' => $projects, // An array of projects to run
+	'projects' => array( // An array of projects to run
+		'ciko' => Model_Ciko_Project::factory('Ciko')
+			->repository('git://github.com/zombor/Ciko.git')
+			->branch('master')
+			->runner('ls -l')
+	),
 );
