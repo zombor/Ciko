@@ -77,7 +77,31 @@ class Minion_Task_Ciko_Run extends Minion_Task
 
 		$status = trim(proc_close($resource));
 
-		$project->write($stdout, $stderr, $status);
+		// Run reporters if status was success
+		if ( ! $status)
+		{
+			$output = array(
+				'stdout' => $stdout,
+				'reporters' => array(),
+			);
+
+			foreach ($project->reporters() as $reporter)
+			{
+				$output['reporters'][$reporter->name()] = $reporter->analyze();
+			}
+
+			$project->write(json_encode($output), $stderr, $status);
+		}
+		else
+		{
+			$project->write(json_encode($stdout), $stderr, $status);
+		}
+
+		// Run notifiers
+		foreach ($project->notifiers() as $notifier)
+		{
+			$notifier->execute($project);
+		}
 
 		if ($status)
 		{

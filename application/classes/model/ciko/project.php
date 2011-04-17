@@ -17,6 +17,9 @@ class Model_Ciko_Project extends Model
 	// Reporters to run
 	protected $_reporters = array();
 
+	// Notifiers to run
+	protected $_notifiers = array();
+
 	/**
 	 * Constructor that sets the project name
 	 *
@@ -115,6 +118,22 @@ class Model_Ciko_Project extends Model
 		}
 
 		return $this->_reporters;
+	}
+
+	/**
+	 * Gets/sets the reporters for this object
+	 *
+	 * @return $this or array
+	 */
+	public function notifiers($notifiers = NULL)
+	{
+		if ($notifiers)
+		{
+			$this->_notifiers = $notifiers;
+			return $this;
+		}
+
+		return $this->_notifiers;
 	}
 
 	/**

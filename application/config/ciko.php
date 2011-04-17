@@ -26,6 +26,13 @@ return array(
 				array(
 					new Reporter_Clover('build/clover.xml'),
 				)
+			)
+			->notifiers(
+				array(
+					new Notifier_IRC(
+						'irc.freenode.net', array('#kohana','#kohana-dev')
+					)
+				)
 			),
 	),
 );

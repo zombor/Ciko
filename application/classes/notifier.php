@@ -1,23 +1,18 @@
 <?php
 /**
- * Reporter class for Clover output
+ * Interface for notifiers
  *
  * @package    Ciko
  * @author     Jeremy Bush
  * @copyright  (c) 2011 Jeremy Bush
  * @license    http://github.com/zombor/Ciko/raw/develop/LICENSE
  */
-class Reporter_Clover extends Reporter
+interface Notifier
 {
-	protected $_name = 'clover';
-
 	/**
-	 * Method interface for analyzing reports
+	 * Runs a notification
 	 *
 	 * @return null
 	 */
-	public function analyze()
-	{
-		
-	}
+	public function execute(Model_Ciko_Project $project);
 }
