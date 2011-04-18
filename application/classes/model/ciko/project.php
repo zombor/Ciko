@@ -91,6 +91,7 @@ class Model_Ciko_Project extends Model
 	/**
 	 * Gets/sets the runner command for this project
 	 *
+	 * @todo   Should this return a Runner instance?
 	 * @return $this or string
 	 */
 	public function runner($command = NULL)

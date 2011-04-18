@@ -54,34 +54,15 @@ class Minion_Task_Ciko_Run extends Minion_Task
 			'yellow'
 		);
 
-		// Run the runner command
-		$descriptorspec = array(
-			1 => array('pipe', 'w'),
-			2 => array('pipe', 'w'),
-		);
+		$runner = Runner::factory($project->runner(), Kohana::config('ciko.clone_path').url::title($project->name()));
 
-		$pipes = array();
-		$resource = proc_open(
-			escapeshellcmd($project->runner()),
-			$descriptorspec,
-			$pipes,
-			'/tmp/'.url::title($project->name())
-		);
-
-		// Capture the runner output
-		$stdout = stream_get_contents($pipes[1]);
-		$stderr = stream_get_contents($pipes[2]);
-		foreach ($pipes as $pipe) {
-			fclose($pipe);
-		}
-
-		$status = trim(proc_close($resource));
+		$status = $runner->execute();
 
 		// Run reporters if status was success
-		if ( ! $status)
+		if ($status)
 		{
 			$output = array(
-				'stdout' => $stdout,
+				'stdout' => $runner->stdout(),
 				'reporters' => array(),
 			);
 
@@ -90,11 +71,11 @@ class Minion_Task_Ciko_Run extends Minion_Task
 				$output['reporters'][$reporter->name()] = $reporter->analyze();
 			}
 
-			$project->write(json_encode($output), $stderr, $status);
+			$project->write(json_encode($output), $runner->stderr(), $status);
 		}
 		else
 		{
-			$project->write(json_encode($stdout), $stderr, $status);
+			$project->write(json_encode($stdout), $runner->stderr(), $status);
 		}
 
 		// Run notifiers
@@ -106,15 +87,16 @@ class Minion_Task_Ciko_Run extends Minion_Task
 		if ($status)
 		{
 			return Minion_CLI::write(
-				'There was an error executing the runner ('.$status.'):'.
-					"\n$stderr",
-				'red'
-			);
+				'Job successfully ran for project '.$config['project'].':'
+					.PHP_EOL.$runner->stdout(),
+				'green');
 		}
-
-		return Minion_CLI::write(
-			'Job successfully ran for project '.$config['project'].":\n$stdout",
-			'green'
-		);
+		else
+		{
+			return Minion_CLI::write(
+				'There was an error executing the runner ('.$status.'):'
+					.PHP_EOL.$runner->stderr().')',
+				'red');
+		}
 	}
 }
