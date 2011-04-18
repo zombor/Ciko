@@ -178,7 +178,10 @@ class Model_Ciko_Project extends Model
 			db::select('rowid')
 				->from('projects')
 				->where('project', '=', url::title($this->name()))
+				->as_object()
 				->execute()
+				->current()
+				->rowid
 		);
 	}
 
