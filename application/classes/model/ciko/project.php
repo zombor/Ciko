@@ -57,6 +57,16 @@ class Model_Ciko_Project extends Model
 	}
 
 	/**
+	 * Returns a safe name for this project, removes spaces, etc (url::title())
+	 *
+	 * @return string
+	 */
+	public function safe_name()
+	{
+		return url::title($this->name());
+	}
+
+	/**
 	 * Gets/sets the repository for this project
 	 *
 	 * @return $this or string

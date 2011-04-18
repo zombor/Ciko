@@ -40,6 +40,32 @@ class Test_Model_CikoProject extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Provider for test_safe_name()
+	 *
+	 * @return array
+	 */
+	public function provider_safe_name()
+	{
+		return array(
+			array('Ciko', 'ciko'),
+			array('Ciko Project', 'ciko-project'),
+			array('Ciko-Project', 'ciko-project'),
+		);
+	}
+	/**
+	 * Tests the safe_name() method
+	 * 
+	 * @dataProvider provider_safe_name
+	 *
+	 * @return null
+	 */
+	public function test_safe_name($input, $return)
+	{
+		$project = new Model_Ciko_Project($input);
+		$this->assertSame($return, $project->safe_name());
+	}
+
+	/**
 	 * Provider for test_repository()
 	 *
 	 * @return array
