@@ -22,7 +22,14 @@ abstract class Reporter
 	/**
 	 * Method interface for analyzing reports
 	 *
-	 * @return null
+	 * @return bool
 	 */
 	abstract public function analyze();
+
+	/**
+	 * Method interface for rendering results as HTML
+	 *
+	 * @return string
+	 */
+	abstract public function render_html();
 }

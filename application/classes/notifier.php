@@ -12,7 +12,7 @@ interface Notifier
 	/**
 	 * Runs a notification
 	 *
-	 * @return null
+	 * @return bool
 	 */
 	public function execute(Model_Ciko_Project $project);
 }

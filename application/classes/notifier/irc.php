@@ -12,10 +12,11 @@ class Notifier_IRC implements Notifier
 	/**
 	 * Notifies IRC
 	 *
-	 * @return null
+	 * @return bool
 	 */
 	public function execute(Model_Ciko_Project $project)
 	{
-		
+		// Notification was sucessful
+		return TRUE;
 	}
 }
