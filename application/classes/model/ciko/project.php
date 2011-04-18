@@ -155,4 +155,39 @@ class Model_Ciko_Project extends Model
 			array(url::title($this->name()), $status, $stdout, $stderr)
 		)->execute();
 	}
+
+	/**
+	 * Returns an array of all projects
+	 *
+	 * @return array
+	 */
+	public static function all()
+	{
+		return Kohana::config('ciko.projects');
+	}
+
+	/**
+	 * Returns if this project has had it's runner ran yet
+	 *
+	 * @return bool
+	 */
+	public function has_run()
+	{
+		return (bool) count(db::select('rowid')->from('projects')->where('project', '=', url::title($this->name())));
+	}
+
+	/**
+	 * Return the status of the last runner job
+	 *
+	 * @return bool
+	 */
+	public function latest_status()
+	{
+		if ( ! $this->has_run())
+		{
+			return FALSE;
+		}
+
+		return (bool) db::select('result')->from('projects')->where('project', '=', url::title($this->name()))->limit(1)->order_by('rowid', 'desc');
+	}
 }
