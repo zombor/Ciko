@@ -17,7 +17,7 @@ class Controller_Ciko extends Controller
 	 */
 	public function action_index()
 	{
-		
+		$this->response->body(new View_Ciko_Index);
 	}
 
 	/**
@@ -27,7 +27,7 @@ class Controller_Ciko extends Controller
 	 */
 	public function action_project($project = NULL)
 	{
-		
+		$this->response->body(new View_Ciko_Project);
 	}
 
 	/**
