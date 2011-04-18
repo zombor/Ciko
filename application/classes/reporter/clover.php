@@ -12,12 +12,24 @@ class Reporter_Clover extends Reporter
 	protected $_name = 'clover';
 
 	/**
-	 * Method interface for analyzing reports
+	 * Method for analyzing reports
 	 *
-	 * @return null
+	 * @return bool
 	 */
 	public function analyze()
 	{
-		
+		// Analysis was sucessful
+		return TRUE;
+	}
+
+	/**
+	 * Method for rendering results as HTML
+	 *
+	 * @return string
+	 */
+	public function render_html()
+	{
+		// Dummy output
+		return '<ul><li>Covered Methods: 50%</li><li></li>Covered Classes: 10%</ul>';
 	}
 }

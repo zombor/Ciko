@@ -9,7 +9,7 @@
 	url = git://github.com/kohana/database.git
 [submodule "modules/git"]
 	path = modules/git
-	url = git://github.com/Zeelot/kohana-git.git
+	url = git://github.com/zombor/kohana-git.git
 [submodule "modules/minion-core"]
 	path = modules/minion-core
 	url = git://github.com/kohana-minion/core.git
