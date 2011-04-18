@@ -26,11 +26,19 @@ class View_Ciko_Index extends Kostache_Layout
 					array(
 						'controller' => 'ciko',
 						'action' => 'project',
-						'id' => url::title($project->name())
+						'id' => url::title($project->name()),
 					)
 				),
 				'has_ran' => $project->has_run(),
 				'status' => $project->latest_status(),
+				'total_runs' => $project->total_num_runs(),
+				'run_uri' => Route::get('default')->uri(
+					array(
+						'controller' => 'ciko',
+						'action' => 'run',
+						'id' => url::title($project->name()),
+					)
+				),
 			);
 		}
 

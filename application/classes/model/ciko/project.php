@@ -174,7 +174,12 @@ class Model_Ciko_Project extends Model
 	 */
 	public function has_run()
 	{
-		return (bool) count(db::select('rowid')->from('projects')->where('project', '=', url::title($this->name())));
+		return (bool) count(
+			db::select('rowid')
+				->from('projects')
+				->where('project', '=', url::title($this->name()))
+				->execute()
+		);
 	}
 
 	/**
@@ -189,6 +194,27 @@ class Model_Ciko_Project extends Model
 			return FALSE;
 		}
 
-		return (bool) db::select('result')->from('projects')->where('project', '=', url::title($this->name()))->limit(1)->order_by('rowid', 'desc');
+		return (bool) db::select('result')
+			->from('projects')
+			->where('project', '=', url::title($this->name()))
+			->limit(1)->order_by('rowid', 'desc')
+			->as_object()
+			->execute()
+			->current()
+			->result;
+	}
+
+	/**
+	 * Total number of runs a project has had
+	 *
+	 * @return int
+	 */
+	public function total_num_runs()
+	{
+		return (int) db::select('count(*) as count')
+			->from('projects')
+			->where('project', '=', url::title($this->name()))
+			->as_object()
+			->execute()->current()->count;
 	}
 }

@@ -1,7 +1,10 @@
 <ul>
 {{#projects}}
 	<li class="project{{^has_ran}} not_run{{/has_ran}}{{#has_ran}}{{#status}} success{{/status}}{{^status}} fail{{/status}}"{{/has_ran}}>
-		<a href="{{uri}}">{{name}}</a>
+		<a href="{{uri}}">{{name}}</a> ({{total_runs}} runs)
+		<form action="{{run_uri}}" method="post">
+			<input type="submit" value="Run Now" />
+		</form>
 	</li>
 {{/projects}}
 </ul>

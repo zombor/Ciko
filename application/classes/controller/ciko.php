@@ -35,8 +35,29 @@ class Controller_Ciko extends Controller
 	 *
 	 * @return null
 	 */
-	public function action_run($project)
+	public function action_run($project = NULL)
 	{
-		
+		if ( ! $project)
+		{
+			throw new Http_Exception_404;
+		}
+
+		if (Kohana::$is_cli OR Request::POST == $this->request->method())
+		{
+			// Investigate a better way to do this, should probably be
+			// abstracted away somewhere, in Runner?
+			shell_exec(
+				'nohup ./minion ciko:run --project='.
+				escapeshellcmd($project).' > /dev/null &'
+			);
+
+			$this->response->body(json_encode('running...'));
+		}
+
+		if ( ! Kohana::$is_cli)
+		{
+			// We only accept POST at this uri if it's a web request
+			throw new Http_Exception_405;
+		}
 	}
 }
