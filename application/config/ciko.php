@@ -20,8 +20,8 @@ return array(
 	'projects' => array( // An array of projects to run
 		'ciko' => Model_Ciko_Project::factory('Ciko')
 			->repository('git://github.com/zombor/Ciko.git')
-			->branch('master')
-			->runner('ls -l')
+			->branch('develop')
+			->runner('phpunit --configuration phpunit.xml')
 			->reporters(
 				array(
 					new Reporter_Clover('build/clover.xml'),
