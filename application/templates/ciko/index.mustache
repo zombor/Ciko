@@ -1,4 +1,7 @@
 <ul>
-{{#projects}}<li><a href="{{uri}}">{{name}}</a></li>
+{{#projects}}
+	<li class="project{{^has_ran}} not_run{{/has_ran}}{{#has_ran}}{{#status}} success{{/status}}{{^status}} fail{{/status}}"{{/has_ran}}>
+		<a href="{{uri}}">{{name}}</a>
+	</li>
 {{/projects}}
 </ul>
