@@ -10,14 +10,14 @@
 class Runner
 {
 	// Inputs
-	protected $command = NULL;
-	protected $cwd = NULL;
-	protected $env = NULL;
+	protected $_command = NULL;
+	protected $_cwd = NULL;
+	protected $_env = NULL;
 
 	// Outputs
-	protected $status = NULL;
-	protected $stdout = NULL;
-	protected $stderr = NULL;
+	protected $_status = NULL;
+	protected $_stdout = NULL;
+	protected $_stderr = NULL;
 
 	/**
 	 * Creates a new instance of Runner
@@ -36,9 +36,9 @@ class Runner
 	 */
 	public function __construct($command, $cwd, $env = NULL)
 	{
-		$this->command = $command;
-		$this->cwd = $cwd;
-		$this->env = $env;
+		$this->_command = $command;
+		$this->_cwd = $cwd;
+		$this->_env = $env;
 	}
 
 	/**
@@ -56,16 +56,16 @@ class Runner
 		$pipes = array();
 		
 		$resource = proc_open(
-			escapeshellcmd($this->command),
+			escapeshellcmd($this->_command),
 			$descriptorspec,
 			$pipes,
-			$this->cwd,
-			$this->env
+			$this->_cwd,
+			$this->_env
 		);
 
 		// Capture the runner output
-		$this->stdout = stream_get_contents($pipes[1]);
-		$this->stderr = stream_get_contents($pipes[2]);
+		$this->_stdout = stream_get_contents($pipes[1]);
+		$this->_stderr = stream_get_contents($pipes[2]);
 
 		foreach ($pipes as $pipe)
 		{
@@ -75,9 +75,9 @@ class Runner
 		$status = trim(proc_close($resource));
 
 		// Invert the return from proc_close
-		$this->status = ! $status ? TRUE : FALSE;
+		$this->_status = ! $status ? TRUE : FALSE;
 
-		return $this->status;
+		return $this->_status;
 	}
 
 	/**
@@ -87,7 +87,7 @@ class Runner
 	 */
 	public function status()
 	{
-		return $this->status;
+		return $this->_status;
 	}
 
 	/**
@@ -97,7 +97,7 @@ class Runner
 	 */
 	public function stdout()
 	{
-		return $this->stdout;
+		return $this->_stdout;
 	}
 
 	/**
@@ -107,6 +107,6 @@ class Runner
 	 */
 	public function stderr()
 	{
-		return $this->stderr;
+		return $this->_stderr;
 	}
 }
