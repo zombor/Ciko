@@ -109,10 +109,12 @@ Kohana::modules(array(
  */
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'welcome',
+		'controller' => 'ciko',
 		'action'     => 'index',
 	));
 
 
 // Setup the database
 db::query(NULL, 'CREATE TABLE IF NOT EXISTS "projects" ("project" TEXT, "result" INTEGER, "stdout" TEXT, "stderr" TEXT)')->execute();
+
+Git::$git_path = '/opt/local/bin/git';

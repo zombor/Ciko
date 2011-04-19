@@ -29,7 +29,7 @@ class Minion_Task_Ciko_Run extends Minion_Task
 	 * @return Something
 	 */
 	public function execute(array $config)
-	{
+	{var_dump('foo');
 		if (empty($config['project']))
 		{
 			return Minion_CLI::write('Please specify a project.', 'red');
@@ -44,7 +44,6 @@ class Minion_Task_Ciko_Run extends Minion_Task
 		try
 		{
 			// Clone the source
-			Git::$git_path = trim(`which git`);
 			$git = new Git(
 				Kohana::config('ciko.clone_path').url::title($project->name())
 			);

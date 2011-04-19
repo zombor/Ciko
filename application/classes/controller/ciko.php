@@ -46,15 +46,35 @@ class Controller_Ciko extends Controller
 		{
 			// Investigate a better way to do this, should probably be
 			// abstracted away somewhere, in Runner?
-			shell_exec(
-				'nohup ./minion ciko:run --project='.
-				escapeshellcmd($project).' > /dev/null &'
+			
+			$descriptorspec = array(
+				1 => array('pipe', 'w'),
+				2 => array('pipe', 'w'),
 			);
+
+			$pipes = array();
+
+			$resource = proc_open(
+				escapeshellcmd(DOCROOT.'minion ciko:run --project='.
+				escapeshellcmd($project).' > /dev/null &'),
+				$descriptorspec,
+				$pipes
+			);
+
+			// Capture the runner output
+			$stdout = stream_get_contents($pipes[1]);
+			$stderr = stream_get_contents($pipes[2]);
+
+			foreach ($pipes as $pipe)
+			{
+				fclose($pipe);
+			}
+
+			$status = trim(proc_close($resource));
 
 			$this->response->body(json_encode('running...'));
 		}
-
-		if ( ! Kohana::$is_cli)
+ 		else
 		{
 			// We only accept POST at this uri if it's a web request
 			throw new Http_Exception_405;

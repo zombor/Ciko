@@ -159,12 +159,23 @@ class Model_Ciko_Project extends Model
 			'blue'
 		);
 
+		Minion_CLI::write(
+			$stdout,
+			'green'
+		);
+
+		Minion_CLI::write(
+			$stderr,
+			'red'
+		);
+
 		db::insert(
 			'projects',
 			array('project', 'result', 'stdout', 'stderr')
 		)->values(
 			array(url::title($this->name()), $status, $stdout, $stderr)
 		)->execute();
+
 	}
 
 	/**
