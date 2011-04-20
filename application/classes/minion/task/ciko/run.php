@@ -113,6 +113,7 @@ class Minion_Task_Ciko_Run extends Minion_Task
 		{
 			// Write out the error
 			$project->write('', json_encode($e->getMessage()), $e->getCode());
+			exit(1);
 		}
 	}
 }

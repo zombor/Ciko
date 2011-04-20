@@ -35,7 +35,12 @@ class View_Ciko_Index extends Kostache_Layout
 				}
 				catch (Exception $e)
 				{
-					// There was an error decoding the json, ignore for now
+					$history[] = array(
+						'rowid' => $run->rowid,
+						'result' => $run->result,
+						'stdout' => '',
+						'stderr' => json_decode($run->stderr),
+					);
 				}
 			}
 

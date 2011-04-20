@@ -19,7 +19,7 @@ return array(
 	'clone_path' => '/tmp/', // Full path to where projects will be cloned
 	'projects' => array( // An array of projects to run
 		'ciko' => Model_Ciko_Project::factory('Ciko')
-			->repository('.')
+			->repository('../.')
 			->branch('develop')
 			->runner('phpunit --configuration phpunit.xml')
 			->reporters(
