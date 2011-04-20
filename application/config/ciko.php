@@ -19,10 +19,10 @@ return array(
 	'clone_path' => '/tmp/', // Full path to where projects will be cloned
 	'projects' => array( // An array of projects to run
 		'ciko' => Model_Ciko_Project::factory('Ciko')
-			->repository('../.')
-			->branch('develop')
-			->runner('phpunit --configuration phpunit.xml')
-			->reporters(
+			->repository('../.') // Location of the remote repository
+			->branch('develop') // branch to build
+			->runner('phpunit --configuration phpunit.xml') // Runner to execute
+			/*->reporters(
 				array(
 					new Reporter_Clover('build/clover.xml'),
 				)
@@ -33,6 +33,6 @@ return array(
 						'irc.freenode.net', array('#kohana','#kohana-dev')
 					)
 				)
-			),
+			)*/,
 	),
 );
