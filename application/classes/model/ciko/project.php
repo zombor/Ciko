@@ -220,6 +220,22 @@ class Model_Ciko_Project extends Model
 	}
 
 	/**
+	 * Gets the latest run from a runner job
+	 *
+	 * @return stdObject
+	 */
+	public function last_run()
+	{
+		return db::select('rowid, *')
+			->from('projects')
+			->where('project', '=', url::title($this->name()))
+			->limit(1)->order_by('rowid', 'desc')
+			->as_object()
+			->execute()
+			->current();
+	}
+
+	/**
 	 * Return the status of the last runner job
 	 *
 	 * @return bool
