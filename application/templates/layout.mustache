@@ -3,9 +3,20 @@
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<meta content="en" http-equiv="Content-Language" />
+		<link rel="stylesheet" type="text/css" href="assets/css/ciko.css" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('li.project').click(function(e)
+				{
+					$(this).find('.run-history').slideToggle();
+				});
+			});
+		</script>
 		<title>Ciko</title>
 	</head>
 	<body>
+		<h1>Ciko Continuous Integration</h1>
 		{{>content}}
 	</body>
 </html>

@@ -201,9 +201,22 @@ class Model_Ciko_Project extends Model
 				->where('project', '=', url::title($this->name()))
 				->as_object()
 				->execute()
-				->current()
-				->rowid
 		);
+	}
+
+	/**
+	 * Returns all runs this project has ran
+	 *
+	 * @return array
+	 */
+	public function runs()
+	{
+		return db::select('rowid, *')
+			->from('projects')
+			->where('project', '=', url::title($this->name()))
+			->order_by('rowid', 'desc')
+			->as_object()
+			->execute();
 	}
 
 	/**

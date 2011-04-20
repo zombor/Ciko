@@ -13,7 +13,7 @@ return array
 			 * string   password    database password
 			 * boolean  persistent  use persistent connections?
 			 */
-			'dsn'        => 'sqlite:'.DOCROOT.'ciko.sq3',
+			'dsn'        => 'sqlite:'.DOCROOT.'../ciko.sq3',
 			'username'   => NULL,
 			'password'   => NULL,
 			'persistent' => FALSE,

@@ -1,10 +1,26 @@
 <ul>
 {{#projects}}
-	<li class="project{{^has_ran}} not_run{{/has_ran}}{{#has_ran}}{{#status}} success{{/status}}{{^status}} fail{{/status}}"{{/has_ran}}>
-		<a href="{{uri}}">{{name}}</a> ({{total_runs}} runs)
-		<form action="{{run_uri}}" method="post">
-			<input type="submit" value="Run Now" />
-		</form>
+	<li class="project{{^has_ran}} not_run{{/has_ran}}{{#has_ran}}{{#status}} success{{/status}}{{^status}} fail{{/status}}{{/has_ran}}">
+		{{name}} ({{total_runs}} runs) {{^has_ran}} This project hasn't built yet!{{/has_ran}}{{#has_ran}}{{#status}}Everything is great!{{/status}}{{^status}}This project is failing!{{/status}}{{/has_ran}}
+		<div class="run-history">
+			{{#has_ran}}
+			<ul>
+			{{#history}}
+				<li class="{{#result}} success{{/result}}{{^result}} fail{{/result}}">
+					<h2>Job #{{rowid}}</h2>
+					<div class="stdout">
+						<h3>Stdout:</h3>
+						<pre>{{stdout}}</pre>
+					</div>
+					<div class="stderr">
+						<h3>Stderr:</h3>
+						<pre>{{stderr}}</pre>
+					</div>
+				</li>
+			{{/history}}
+			{{/has_ran}}
+			</ul>
+		</div>
 	</li>
 {{/projects}}
 </ul>

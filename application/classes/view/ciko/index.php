@@ -20,6 +20,25 @@ class View_Ciko_Index extends Kostache_Layout
 
 		foreach (Model_Ciko_Project::all() as $name => $project)
 		{
+			$history = array();
+			foreach ($project->runs() as $run)
+			{
+				try
+				{
+					$stdout = json_decode($run->stdout);
+					$history[] = array(
+						'rowid' => $run->rowid,
+						'result' => $run->result,
+						'stdout' => $stdout->stdout,
+						'stderr' => json_decode($run->stderr),
+					);
+				}
+				catch (Exception $e)
+				{
+					// There was an error decoding the json, ignore for now
+				}
+			}
+
 			$projects[] = array(
 				'name' => $project->name(),
 				'uri' => Route::get('default')->uri(
@@ -39,6 +58,7 @@ class View_Ciko_Index extends Kostache_Layout
 						'id' => url::title($project->name()),
 					)
 				),
+				'history' => $history,
 			);
 		}
 
