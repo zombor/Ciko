@@ -10,7 +10,7 @@ Ciko is best used as a pre-commit (local hosted, recommended) or post-commit (re
 
 .git/hooks/pre-commit
 
-	./minion ciko:run --project=ciko
+	/path/to/ciko/minion ciko:run --project=ciko
 
 If you are using a post-commit hook and want to have a remote server build, you'll need to do a POST request to `/ciko/run/<project-slug>`:
 

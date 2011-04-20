@@ -20,7 +20,9 @@ then
 	shift 1
 fi
 
-cd docroot
+SCRIPT_DIR=`dirname "$0"`
+
+cd $SCRIPT_DIR/docroot
 
 php index.php --uri=minion "$TASK" "$@"
 

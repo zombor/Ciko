@@ -84,7 +84,7 @@ class Minion_Task_Ciko_Run extends Minion_Task
 			else
 			{
 				$project->write(
-					json_encode($stdout), $runner->stderr(), $status
+					json_encode($runner->stdout()), $runner->stderr(), $status
 				);
 			}
 
