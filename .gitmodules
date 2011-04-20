@@ -1,0 +1,18 @@
+[submodule "system"]
+	path = system
+	url = git://github.com/kohana/core.git
+[submodule "modules/kostache"]
+	path = modules/kostache
+	url = git://github.com/zombor/KOstache.git
+[submodule "modules/database"]
+	path = modules/database
+	url = git://github.com/kohana/database.git
+[submodule "modules/git"]
+	path = modules/git
+	url = git://github.com/Zeelot/kohana-git.git
+[submodule "modules/minion-core"]
+	path = modules/minion-core
+	url = git://github.com/kohana-minion/core.git
+[submodule "modules/unittest"]
+	path = modules/unittest
+	url = git://github.com/kohana/unittest.git

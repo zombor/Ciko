@@ -1,0 +1,28 @@
+body {
+	background-color: #F1F8DB;
+}
+
+li.project {
+	padding: 5px;
+}
+
+li.project .run-history {
+	display: none;
+}
+
+li.project a {
+	font-weight: bold;
+}
+
+li.not_run {
+	background-color: yellow;
+}
+
+li.success {
+	background-color: green;
+	color: white;
+}
+
+li.fail {
+	background-color: red;
+}
