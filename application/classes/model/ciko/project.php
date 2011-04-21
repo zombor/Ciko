@@ -136,10 +136,19 @@ class Model_Ciko_Project extends Model
 	 *
 	 * @return $this or array
 	 */
-	public function notifiers($notifiers = NULL)
+	public function notifiers(array $notifiers = NULL)
 	{
 		if ($notifiers)
 		{
+			foreach ($notifiers as $key => $notifier)
+			{
+				if ( ! $notifier instanceof Notifier)
+				{
+					throw new Kohana_Exception(
+						'Invalid notifier :notifier', array(':notifier' => $key)
+					);
+				}
+			}
 			$this->_notifiers = $notifiers;
 			return $this;
 		}

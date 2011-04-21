@@ -201,8 +201,10 @@ class Test_Model_CikoProject extends PHPUnit_Framework_TestCase
 	{
 		return array(
 			array(
-				new Notifier_IRC(
-					'irc.freenode.net', array('#kohana','#kohana-dev')
+				array(
+					new Notifier_IRC(
+						'irc.freenode.net', array('#kohana','#kohana-dev')
+					)
 				)
 			),
 		);
@@ -231,9 +233,7 @@ class Test_Model_CikoProject extends PHPUnit_Framework_TestCase
 	 */
 	public function test_notifiers_only_accepts_notifier_objects()
 	{
-		$this->markTestSkipped();
-
 		$project = new Model_Ciko_Project('Ciko');
-		$project->notifiers(array('foo'));
+		$project->notifiers(array('foobar' => 'foo'));
 	}
 }
