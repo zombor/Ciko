@@ -120,10 +120,20 @@ class Model_Ciko_Project extends Model
 	 *
 	 * @return $this or array
 	 */
-	public function reporters($reporters = NULL)
+	public function reporters(array $reporters = NULL)
 	{
 		if ($reporters)
 		{
+			foreach ($reporters as $key => $reporter)
+			{
+				if ( ! $reporter instanceof Reporter)
+				{
+					throw new Kohana_Exception(
+						'Invalid reporter :reporter', array(':reporter' => $key)
+					);
+				}
+			}
+
 			$this->_reporters = $reporters;
 			return $this;
 		}

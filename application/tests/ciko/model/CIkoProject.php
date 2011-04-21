@@ -186,10 +186,8 @@ class Test_Model_CikoProject extends PHPUnit_Framework_TestCase
 	 */
 	public function test_reporters_only_accepts_reporter_objects()
 	{
-		$this->markTestSkipped();
-
 		$project = new Model_Ciko_Project('Ciko');
-		$project->reporters(array('foo'));
+		$project->reporters(array('test' => 'foo'));
 	}
 
 	/**
