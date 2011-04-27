@@ -91,7 +91,7 @@ class Minion_Task_Ciko_Run extends Minion_Task
 			// Run notifiers
 			foreach ($project->notifiers() as $notifier)
 			{
-				$notifier->execute($project);
+				$notifier->execute($project, $status);
 			}
 
 			if ($status)

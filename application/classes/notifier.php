@@ -11,8 +11,11 @@ interface Notifier
 {
 	/**
 	 * Runs a notification
+	 * 
+	 * @param Model_Ciko_Project $project the project to notify with
+	 * @param bool               $status  if the job ran successfully
 	 *
 	 * @return bool
 	 */
-	public function execute(Model_Ciko_Project $project);
+	public function execute(Model_Ciko_Project $project, $status);
 }
