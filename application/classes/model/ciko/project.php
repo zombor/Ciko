@@ -120,10 +120,20 @@ class Model_Ciko_Project extends Model
 	 *
 	 * @return $this or array
 	 */
-	public function reporters($reporters = NULL)
+	public function reporters(array $reporters = NULL)
 	{
 		if ($reporters)
 		{
+			foreach ($reporters as $key => $reporter)
+			{
+				if ( ! $reporter instanceof Reporter)
+				{
+					throw new Kohana_Exception(
+						'Invalid reporter :reporter', array(':reporter' => $key)
+					);
+				}
+			}
+
 			$this->_reporters = $reporters;
 			return $this;
 		}
@@ -136,10 +146,19 @@ class Model_Ciko_Project extends Model
 	 *
 	 * @return $this or array
 	 */
-	public function notifiers($notifiers = NULL)
+	public function notifiers(array $notifiers = NULL)
 	{
 		if ($notifiers)
 		{
+			foreach ($notifiers as $key => $notifier)
+			{
+				if ( ! $notifier instanceof Notifier)
+				{
+					throw new Kohana_Exception(
+						'Invalid notifier :notifier', array(':notifier' => $key)
+					);
+				}
+			}
 			$this->_notifiers = $notifiers;
 			return $this;
 		}
@@ -217,6 +236,22 @@ class Model_Ciko_Project extends Model
 			->order_by('rowid', 'desc')
 			->as_object()
 			->execute();
+	}
+
+	/**
+	 * Gets the latest run from a runner job
+	 *
+	 * @return stdObject
+	 */
+	public function last_run()
+	{
+		return db::select('rowid, *')
+			->from('projects')
+			->where('project', '=', url::title($this->name()))
+			->limit(1)->order_by('rowid', 'desc')
+			->as_object()
+			->execute()
+			->current();
 	}
 
 	/**

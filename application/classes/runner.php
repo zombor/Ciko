@@ -54,9 +54,9 @@ class Runner
 		);
 
 		$pipes = array();
-		
+
 		$resource = proc_open(
-			escapeshellcmd($this->_command),
+			$this->_command,
 			$descriptorspec,
 			$pipes,
 			$this->_cwd,

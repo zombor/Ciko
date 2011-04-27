@@ -4,15 +4,15 @@ It's best used with a single developer on your local machine while doing develop
 
 ## Install
 
-Clone this repository. If you want to look at project runs, you'll need to setup a webserver pointing at the `docroot/` folder.
+Clone this repository (recommended location is a system-wide location like `/usr/local/ciko/`). If you want to look at project runs, you'll need to setup a webserver pointing at the `docroot/` folder.
 
-Ciko is best used as a pre-commit (local hosted, recommended) or post-commit (remote-hosted, not recommended) git hook:
+Ciko is best used as a post-commit git hook on your local machine:
 
-.git/hooks/pre-commit
+If you are using Ciko on your local machine for your local projects:
 
-	./minion ciko:run --project=ciko
+	/path/to/ciko/minion ciko:run --project=ciko
 
-If you are using a post-commit hook and want to have a remote server build, you'll need to do a POST request to `/ciko/run/<project-slug>`:
+You can also use it as a remote server with a post-receive hook. You'll need to do a POST request to `/ciko/run/<project-slug>`:
 
 	curl -d "" http://example.com/ciko/run/<project-slug>
 
@@ -32,6 +32,14 @@ A reporter should take the output from a runner job, and turn it into a human re
 ## Notifiers
 
 A notifier is similar to a reporter, except it can send an email out, or notify IRC.
+
+### Currently implemented notifiers
+
+#### Git
+
+The git notifier tags the repository saying it ran a CI build on the repository. The tag name will be in the syntax of `ciko-#<build-number>`.
+
+It will also push the tag to the cloned repository, so make sure the machine (and user) ciko is running under has permission to do that.
 
 # Limitations
 

@@ -21,18 +21,11 @@ return array(
 		'ciko' => Model_Ciko_Project::factory('Ciko')
 			->repository('../.') // Location of the remote repository
 			->branch('develop') // branch to build
-			->runner('phpunit --configuration phpunit.xml') // Runner to execute
-			/*->reporters(
-				array(
-					new Reporter_Clover('build/clover.xml'),
-				)
-			)
+			->runner('phpunit --configuration phpunit.xml') // Runner to execute,
 			->notifiers(
 				array(
-					new Notifier_IRC(
-						'irc.freenode.net', array('#kohana','#kohana-dev')
-					)
+					'git' => new Notifier_Git,
 				)
-			)*/,
+			),
 	),
 );
