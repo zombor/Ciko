@@ -16,3 +16,6 @@
 [submodule "modules/unittest"]
 	path = modules/unittest
 	url = git://github.com/kohana/unittest.git
+[submodule "modules/ciko-notifier-email"]
+	path = modules/ciko-notifier-email
+	url = git://github.com/zombor/Ciko-Notifier-Email.git
