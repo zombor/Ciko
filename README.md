@@ -12,10 +12,6 @@ If you are using Ciko on your local machine for your local projects:
 
 	/path/to/ciko/minion ciko:run --project=ciko
 
-You can also use it as a remote server with a post-receive hook. You'll need to do a POST request to `/ciko/run/<project-slug>`:
-
-	curl -d "" http://example.com/ciko/run/<project-slug>
-
 ## Configuration
 
 Configuration in Ciko is easy and pretty self-explanatory:
