@@ -21,7 +21,12 @@ return array(
 		'ciko' => Model_Ciko_Project::factory('Ciko')
 			->repository('../.') // Location of the remote repository
 			->branch('develop') // branch to build
-			->runner('phpunit --configuration phpunit.xml') // Runner to execute,
+			->runner( // Runner(s) to execute,
+				array(
+					'touch /tmp/foo.txt',
+					'phpunit --configuration phpunit.xml'
+				)
+			)
 			->notifiers(
 				array(
 					'git' => new Notifier_Git,

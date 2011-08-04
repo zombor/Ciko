@@ -21,6 +21,12 @@ class Runner
 
 	/**
 	 * Creates a new instance of Runner
+	 * 
+	 * @param string|array $command the command to execute
+	 * @param string       $cwd     the current working directory to execute
+	 *                              the runner in
+	 * @param array        $env     an array of env variables to execute the
+	 *                              runner with
 	 *
 	 * @return Runner
 	 */
@@ -31,6 +37,12 @@ class Runner
 
 	/**
 	 * Constructor
+	 * 
+	 * @param string|array $command the command to execute
+	 * @param string       $cwd     the current working directory to execute
+	 *                              the runner in
+	 * @param array        $env     an array of env variables to execute the
+	 *                              runner with
 	 *
 	 * @return void
 	 */
@@ -54,6 +66,11 @@ class Runner
 		);
 
 		$pipes = array();
+
+		if (is_array($this->_command))
+		{
+			$this->_command = implode(' && ', $this->_command);
+		}
 
 		$resource = proc_open(
 			$this->_command,
