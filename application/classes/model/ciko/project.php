@@ -14,6 +14,9 @@ class Model_Ciko_Project extends Model
 	// The runner command to execute
 	protected $_runner;
 
+	// The post runner commands to execute
+	protected $_post_runners = array();
+
 	// Reporters to run
 	protected $_reporters = array();
 
@@ -113,6 +116,34 @@ class Model_Ciko_Project extends Model
 		}
 
 		return $this->_runner;
+	}
+
+	/**
+	 * Gets/sets the post runner command for this project
+	 *
+	 * @return $this or string
+	 */
+	public function post_runner(array $post_runners = NULL)
+	{
+		if ($post_runners)
+		{
+			foreach ($post_runners as $key => $post_runner)
+			{
+				if ( ! $post_runner instanceof Post_Runner)
+				{
+					throw new Kohana_Exception(
+						'Invalid post runner :post_runner', array(
+							':post_runner' => $key
+						)
+					);
+				}
+			}
+
+			$this->_post_runners = $post_runners;
+			return $this;
+		}
+
+		return $this->_post_runners;
 	}
 
 	/**
