@@ -29,7 +29,7 @@ class View_Ciko_Index extends Kostache_Layout
 					$history[] = array(
 						'rowid' => $run->rowid,
 						'result' => $run->result,
-						'stdout' => $stdout->stdout,
+						'stdout' => $stdout,
 						'stderr' => json_decode($run->stderr),
 					);
 				}

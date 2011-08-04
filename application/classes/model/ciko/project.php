@@ -179,7 +179,7 @@ class Model_Ciko_Project extends Model
 	 */
 	public function notifiers(array $notifiers = NULL)
 	{
-		if ($notifiers)
+		if (NULL !== $notifiers)
 		{
 			foreach ($notifiers as $key => $notifier)
 			{

@@ -104,7 +104,7 @@ class Minion_Task_Ciko_Run extends Minion_Task
 			else
 			{
 				return Minion_CLI::write(
-					'There was an error executing the runner ('.$status.'):'
+					'There was an error executing the runner ('.print_r($status).'):'
 						.PHP_EOL.$runner->stderr().')',
 					'red');
 			}
